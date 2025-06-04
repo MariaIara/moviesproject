@@ -21,7 +21,13 @@ class MovieController extends BaseController
 
     public function index()
     {
-        dd('index');
+        // Retornar todos os filminhos cadastrados
+        $movies = $this->movieService->list();
+
+        // Retornar resposta
+        return $this->response
+            ->setJSON($movies) // NÃO ENCUCAR COM O JSON :)
+            ->setStatusCode(200);
     }
 
     public function create()

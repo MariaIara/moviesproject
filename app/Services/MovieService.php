@@ -14,6 +14,12 @@ class MovieService
         $this->movies = $moviesModel;
     }
 
+    public function list()
+    {
+        // Chama o método da model para retornar todos os dados
+        return $this->movies->findAll();
+    }
+
     public function new(MovieEntity $movie)
     {
         // Chamar método da model pra inserir no banco

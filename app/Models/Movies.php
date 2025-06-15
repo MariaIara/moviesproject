@@ -15,6 +15,13 @@ class Movies extends Model
         'status'
     ];
 
+    public function firstById(int $id): ?MovieEntity
+    {
+        return $this
+            ->where('id', $id)
+            ->first();
+    }
+
     public function create(MovieEntity $movie): MovieEntity
     {
         // O método insert da model retorna apenas o ID

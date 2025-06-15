@@ -47,4 +47,10 @@ class Validation extends BaseConfig
         'category' => 'required|string',
         'status' => 'required|integer'
     ];
+
+    public $movie_update = [
+        'name' => 'permit_empty|string',
+        'category' => 'permit_empty|string',
+        'status' => 'permit_empty|integer'
+    ];
 }

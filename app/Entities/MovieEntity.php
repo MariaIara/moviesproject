@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use App\Enums\MovieStatus;
 use CodeIgniter\Entity\Entity;
 
 class MovieEntity extends Entity

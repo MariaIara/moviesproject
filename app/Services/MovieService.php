@@ -25,4 +25,14 @@ class MovieService
         // Chamar método da model pra inserir no banco
         return $this->movies->create($movie);
     }
+
+    public function update(MovieEntity $movie)
+    {
+        return $this->movies->save($movie);
+    }
+
+    public function destroy(int $id)
+    {
+        return $this->movies->delete($id);
+    }
 }

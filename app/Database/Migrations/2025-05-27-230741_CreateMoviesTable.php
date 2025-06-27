@@ -26,6 +26,10 @@ class CreateMoviesTable extends Migration
                 'type'       => 'INT',
                 'default'    => 0,
             ],
+            'rating' => [
+                'type' => 'INT',
+                'null' => true
+            ]
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('movies');

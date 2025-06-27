@@ -84,6 +84,7 @@ class MovieController extends BaseController
     public function update(int $id)
     {
         $data = $this->request->getJSON(true) ?? [];
+        unset($data['rating']);
 
         if (!$this->validate('movie_update', $data)) {
             return $this->response
@@ -125,6 +126,35 @@ class MovieController extends BaseController
         return $this->response
             ->setJSON([
                 'message' => 'Filme excluído com sucesso'
+            ])
+            ->setStatusCode(200);
+    }
+
+    public function rating(int $id)
+    {
+        $data = $this->request->getJSON(true) ?? [];
+
+        if (!$this->validate('movie_rating', $data)) {
+            return $this->response
+                ->setJSON($this->validator->getErrors())
+                ->setStatusCode(422);
+        }
+
+        if (! $movie = $this->moviesModel->firstWatched($id)) {
+            return $this->response
+                ->setJSON([
+                    'message' => 'Não é possível avaliar um filme ainda não assistido!'
+                ])
+                ->setStatusCode(403);
+        }
+
+        $movie->rating = $data['rating'];
+        $this->moviesModel->save($movie);
+
+        return $this->response
+            ->setJSON([
+                'message' => 'Avaliação adicionada!',
+                'movie' => $movie
             ])
             ->setStatusCode(200);
     }

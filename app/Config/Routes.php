@@ -12,3 +12,5 @@ $routes->get('/movies/(:segment)', [MovieController::class, 'show']);
 $routes->post('/movies', [MovieController::class, 'create']);
 $routes->put('/movies/(:segment)', [MovieController::class, 'update']);
 $routes->delete('/movies/(:segment)', [MovieController::class, 'delete']);
+
+$routes->patch('/movies/(:segment)', [MovieController::class, 'rating']);

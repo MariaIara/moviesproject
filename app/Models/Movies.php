@@ -12,13 +12,22 @@ class Movies extends Model
     protected $allowedFields    = [
         'name',
         'category',
-        'status'
+        'status',
+        'rating'
     ];
 
     public function firstById(int $id): ?MovieEntity
     {
         return $this
             ->where('id', $id)
+            ->first();
+    }
+
+    public function firstWatched(int $id): ?MovieEntity
+    {
+        return $this
+            ->where('id', $id)
+            ->where('status', 3)
             ->first();
     }
 

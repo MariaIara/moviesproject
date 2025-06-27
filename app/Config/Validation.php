@@ -53,4 +53,8 @@ class Validation extends BaseConfig
         'category' => 'permit_empty|string',
         'status' => 'permit_empty|integer'
     ];
+
+    public $movie_rating = [
+        'rating' => 'required|integer'
+    ];
 }

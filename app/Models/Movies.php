@@ -33,4 +33,22 @@ class Movies extends Model
         // Retornar a entity atualizada (com id)
         return $movie;
     }
+
+    public function filterList($filters)
+    {
+        if (isset($filters['category'])) {
+            $this->where('category', $filters['category']);
+        }
+
+        if (isset($filters['status'])) {
+            $this->where('status', $filters['status']);
+        }
+
+        if (isset($filters['q'])) {
+            $this->like('name', $filters['q'])
+                ->orLike('category', $filters['q']);
+        }
+
+        return $this->findAll();
+    }
 }

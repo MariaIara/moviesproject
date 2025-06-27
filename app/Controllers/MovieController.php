@@ -25,8 +25,9 @@ class MovieController extends BaseController
 
     public function index()
     {
-        // Retornar todos os filminhos cadastrados
-        $movies = $this->movieService->list();
+        $filters = $this->request->getGet();
+
+        $movies = $this->moviesModel->filterList($filters);
 
         // Retornar resposta
         return $this->response

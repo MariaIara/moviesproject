@@ -43,7 +43,7 @@ class Movies extends Model
         return $movie;
     }
 
-    public function filterList($filters)
+    public function filterList($filters): array
     {
         if (isset($filters['category'])) {
             $this->where('category', $filters['category']);
@@ -53,11 +53,29 @@ class Movies extends Model
             $this->where('status', $filters['status']);
         }
 
+        if (isset($filters['rating'])) {
+            $this->where('rating', $filters['rating']);
+        }
+
         if (isset($filters['q'])) {
             $this->like('name', $filters['q'])
                 ->orLike('category', $filters['q']);
         }
 
         return $this->findAll();
+    }
+
+    public function ratingPositive(): array
+    {
+        return $this
+            ->whereIn('rating', [3, 4, 5])
+            ->findAll();
+    }
+
+    public function ratingNegative(): array
+    {
+        return $this
+            ->whereIn('rating', [1, 2])
+            ->findAll();
     }
 }

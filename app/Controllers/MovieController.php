@@ -50,6 +50,29 @@ class MovieController extends BaseController
             ->setStatusCode(200);
     }
 
+    public function moviesByRating(string $type)
+    {
+        if ($type !== 'positive' && $type !== 'negative') {
+            return $this->response
+                ->setJSON([
+                    'message' => 'O tipo de avaliação precisa ser "positive" ou "negative"',
+                ])
+                ->setStatusCode(402);
+        }
+
+        if ($type === 'positive') {
+            $movies = $this->moviesModel->ratingPositive();
+        }
+
+        if ($type === 'negative') {
+            $movies = $this->moviesModel->ratingNegative();
+        }
+
+        return $this->response
+            ->setJSON($movies)
+            ->setStatusCode(200);
+    }
+
     public function create()
     {
         // Pegar dados da requisição (array)
